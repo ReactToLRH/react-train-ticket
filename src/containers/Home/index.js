@@ -1,20 +1,16 @@
 import React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
-const Home = function () {
-  return (
-    <div>
-      Home
-    </div>
-  );
-}
+const Home = function() {
+  return <div>Home</div>;
+};
 
 const mapStateToProps = (state) => {
-  return {}
-}
+  return {};
+};
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
-}
+  return {};
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

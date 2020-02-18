@@ -10,7 +10,7 @@ import 'normalize.css/normalize.css';
 ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>, 
+  </Provider>,
   document.getElementById('root')
 );
 
