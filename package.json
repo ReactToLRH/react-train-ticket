@@ -6,11 +6,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
+    "classnames": "^2.2.6",
     "cookie-parser": "~1.4.4",
     "dayjs": "^1.8.20",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "immutable": "^4.0.0-rc.12",
     "jade": "~1.11.0",
     "mocker-api": "^1.12.2",
     "morgan": "~1.9.1",
@@ -21,6 +23,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
+    "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
@@ -29,6 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": "react-app"
   },
