@@ -20,13 +20,13 @@ const Home = function(props) {
     isDateSelectorVisible,
     cityData,
     isLoadingCityData,
-    // highSpeed,
+    highSpeed,
     departDate,
     homeActions
   } = props;
 
   const onBack = useCallback(() => {
-    this.props.history.goBack();
+    props.history.goBack();
   }, []);
 
   const cbs = useMemo(() => {
@@ -39,6 +39,12 @@ const Home = function(props) {
   const departDateCbs = useMemo(() => {
     return {
       onClick: homeActions.showDateSelector
+    };
+  }, []);
+
+  const highSpeedCbs = useMemo(() => {
+    return {
+      toggle: homeActions.toggleHighSpeed
     };
   }, []);
 
@@ -67,15 +73,28 @@ const Home = function(props) {
     };
   }, []);
 
+  const onSubmit = useCallback(() => {
+    console.log('onSubmit', props);
+    props.history.push({
+      pathname: '/query',
+      query: {
+        from,
+        to,
+        date: departDate,
+        highSpeed
+      }
+    });
+  }, []);
+
   return (
     <div>
       <Header title="火车票" isShowBack={true} onBack={onBack} />
-      <form action="./query.html" className="form">
+      <div className="form">
         <Journey from={from} to={to} {...cbs} />
         <DepartDate time={departDate} {...departDateCbs} />
-        <HighSpeed />
-        <Submit />
-      </form>
+        <HighSpeed highSpeed={highSpeed} {...highSpeedCbs} />
+        <Submit onSubmit={onSubmit} />
+      </div>
       <CitySelector
         show={isCitySelectorVisible}
         cityData={cityData}

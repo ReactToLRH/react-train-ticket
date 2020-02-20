@@ -49,7 +49,7 @@ export const actions = {
   }),
   toggleHighSpeed: () => {
     return (dispatch, getState) => {
-      const { highSpeed } = getState;
+      const highSpeed = getState().getIn(['home', 'highSpeed']);
       dispatch({
         type: types.ACTION_SET_HIGH_SPEED,
         params: { highSpeed: !highSpeed }
@@ -93,7 +93,8 @@ export const actions = {
   }),
   exchangeFromTo: () => {
     return (dispatch, getState) => {
-      const { from, to } = getState();
+      const from = getState().getIn(['home', 'from']);
+      const to = getState().getIn(['home', 'to']);
       dispatch(actions.setFrom(to));
       dispatch(actions.setTo(from));
     };
@@ -104,7 +105,7 @@ export const actions = {
   }),
   fetchCityData: () => {
     return (dispatch, getState) => {
-      const { isLoadingCityData } = getState();
+      const isLoadingCityData = getState().getIn(['home', 'isLoadingCityData']);
       if (isLoadingCityData) {
         return;
       }

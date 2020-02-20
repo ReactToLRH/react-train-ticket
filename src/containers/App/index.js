@@ -10,18 +10,18 @@ const App = function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="" component={Home} />
+          <Route path="/" component={Home} />
         </Switch>
       </Router>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state, props) => {
   return {};
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
