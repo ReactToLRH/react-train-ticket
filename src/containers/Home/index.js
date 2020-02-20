@@ -3,23 +3,25 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actions as homeActions } from '../../redux/modules/home';
 import './style.css';
+import { h0 } from '../../utils/utils';
 import Header from '../../components/Header';
 import DepartDate from './components/DepartDate';
 import HighSpeed from './components/HighSpeed';
 import Journey from './components/Journey';
 import Submit from './components/Submit';
 import CitySelector from '../../components/CitySelector';
+import DateSelector from '../../components/DateSelector';
 
 const Home = function(props) {
   const {
     from,
     to,
     isCitySelectorVisible,
-    // isDateSelectorVisible,
+    isDateSelectorVisible,
     cityData,
     isLoadingCityData,
     // highSpeed,
-    // departDate,
+    departDate,
     homeActions
   } = props;
 
@@ -32,7 +34,13 @@ const Home = function(props) {
       exchangeFromTo: homeActions.exchangeFromTo,
       showCitySelector: homeActions.showCitySelector
     };
-  }, [homeActions]);
+  }, []);
+
+  const departDateCbs = useMemo(() => {
+    return {
+      onClick: homeActions.showDateSelector
+    };
+  }, []);
 
   const citySelectorCbs = useMemo(() => {
     return {
@@ -40,14 +48,31 @@ const Home = function(props) {
       fetchCityData: homeActions.fetchCityData,
       onSelect: homeActions.setSelectedCity
     };
-  }, [homeActions]);
+  }, []);
+
+  const onSelectDate = useCallback((day) => {
+    if (!day) {
+      return;
+    }
+    if (day < h0()) {
+      return;
+    }
+    homeActions.setDepartDate(day);
+    homeActions.hideDateSelector();
+  }, []);
+
+  const dateSelectorCbs = useMemo(() => {
+    return {
+      onBack: homeActions.hideDateSelector
+    };
+  }, []);
 
   return (
     <div>
       <Header title="火车票" isShowBack={true} onBack={onBack} />
       <form action="./query.html" className="form">
         <Journey from={from} to={to} {...cbs} />
-        <DepartDate />
+        <DepartDate time={departDate} {...departDateCbs} />
         <HighSpeed />
         <Submit />
       </form>
@@ -56,6 +81,11 @@ const Home = function(props) {
         cityData={cityData}
         isLoading={isLoadingCityData}
         {...citySelectorCbs}
+      />
+      <DateSelector
+        show={isDateSelectorVisible}
+        onSelect={onSelectDate}
+        {...dateSelectorCbs}
       />
     </div>
   );

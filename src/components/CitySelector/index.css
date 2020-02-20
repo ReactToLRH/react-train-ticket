@@ -81,6 +81,10 @@
   font-style: normal;
 }
 
+.search-clean.hidden {
+  display: none;
+}
+
 .city-list {
   margin-right: 30px;
 }
