@@ -27,26 +27,26 @@ const Home = function(props) {
 
   const onBack = useCallback(() => {
     props.history.goBack();
-  }, []);
+  }, [props.history]);
 
   const cbs = useMemo(() => {
     return {
       exchangeFromTo: homeActions.exchangeFromTo,
       showCitySelector: homeActions.showCitySelector
     };
-  }, []);
+  }, [homeActions.exchangeFromTo, homeActions.showCitySelector]);
 
   const departDateCbs = useMemo(() => {
     return {
       onClick: homeActions.showDateSelector
     };
-  }, []);
+  }, [homeActions.showDateSelector]);
 
   const highSpeedCbs = useMemo(() => {
     return {
       toggle: homeActions.toggleHighSpeed
     };
-  }, []);
+  }, [homeActions.toggleHighSpeed]);
 
   const citySelectorCbs = useMemo(() => {
     return {
@@ -54,24 +54,31 @@ const Home = function(props) {
       fetchCityData: homeActions.fetchCityData,
       onSelect: homeActions.setSelectedCity
     };
-  }, []);
+  }, [
+    homeActions.fetchCityData,
+    homeActions.hideCitySelector,
+    homeActions.setSelectedCity
+  ]);
 
-  const onSelectDate = useCallback((day) => {
-    if (!day) {
-      return;
-    }
-    if (day < h0()) {
-      return;
-    }
-    homeActions.setDepartDate(day);
-    homeActions.hideDateSelector();
-  }, []);
+  const onSelectDate = useCallback(
+    (day) => {
+      if (!day) {
+        return;
+      }
+      if (day < h0()) {
+        return;
+      }
+      homeActions.setDepartDate(day);
+      homeActions.hideDateSelector();
+    },
+    [homeActions]
+  );
 
   const dateSelectorCbs = useMemo(() => {
     return {
       onBack: homeActions.hideDateSelector
     };
-  }, []);
+  }, [homeActions.hideDateSelector]);
 
   const onSubmit = useCallback(() => {
     console.log('onSubmit', props);
@@ -84,7 +91,7 @@ const Home = function(props) {
         highSpeed
       }
     });
-  }, []);
+  }, [departDate, from, highSpeed, props, to]);
 
   return (
     <div>
