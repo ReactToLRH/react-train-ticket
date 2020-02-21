@@ -25,34 +25,34 @@ const Home = function(props) {
     homeActions
   } = props;
 
-  const onBack = useCallback(() => {
-    props.history.goBack();
-  }, [props.history]);
-
-  const cbs = useMemo(() => {
+  // 始发站与终点站组件的回调函数
+  const journeyCbs = useMemo(() => {
     return {
-      exchangeFromTo: homeActions.exchangeFromTo,
-      showCitySelector: homeActions.showCitySelector
+      exchangeFromTo: homeActions.exchangeFromTo, // 切换始发站与终点站
+      showCitySelector: homeActions.showCitySelector // 显示城市选择弹出层
     };
   }, [homeActions.exchangeFromTo, homeActions.showCitySelector]);
 
+  // 出发日期组件回调函数
   const departDateCbs = useMemo(() => {
     return {
-      onClick: homeActions.showDateSelector
+      onClick: homeActions.showDateSelector // 显示选择日期弹窗层
     };
   }, [homeActions.showDateSelector]);
 
+  // 是否只看高铁/动车组件回调函数
   const highSpeedCbs = useMemo(() => {
     return {
-      toggle: homeActions.toggleHighSpeed
+      toggle: homeActions.toggleHighSpeed // 勾选/取消 - 只看高铁/动车
     };
   }, [homeActions.toggleHighSpeed]);
 
+  // 城市选择组件回调函数
   const citySelectorCbs = useMemo(() => {
     return {
-      onBack: homeActions.hideCitySelector,
-      fetchCityData: homeActions.fetchCityData,
-      onSelect: homeActions.setSelectedCity
+      onBack: homeActions.hideCitySelector, // 隐藏城市选择弹窗层
+      fetchCityData: homeActions.fetchCityData, // 请求城市数据
+      onSelect: homeActions.setSelectedCity // 选择城市
     };
   }, [
     homeActions.fetchCityData,
@@ -60,6 +60,7 @@ const Home = function(props) {
     homeActions.setSelectedCity
   ]);
 
+  // 时间选择组件回调函数 - 选择时间日期
   const onSelectDate = useCallback(
     (day) => {
       if (!day) {
@@ -68,8 +69,8 @@ const Home = function(props) {
       if (day < h0()) {
         return;
       }
-      homeActions.setDepartDate(day);
-      homeActions.hideDateSelector();
+      homeActions.setDepartDate(day); // 设置出发时间
+      homeActions.hideDateSelector(); // 隐藏时间选择弹出层
     },
     [homeActions]
   );
@@ -84,7 +85,7 @@ const Home = function(props) {
     console.log('onSubmit', props);
     props.history.push({
       pathname: '/query',
-      query: {
+      state: {
         from,
         to,
         date: departDate,
@@ -95,9 +96,9 @@ const Home = function(props) {
 
   return (
     <div>
-      <Header title="火车票" isShowBack={true} onBack={onBack} />
+      <Header title="火车票" isShowBack={false} />
       <div className="form">
-        <Journey from={from} to={to} {...cbs} />
+        <Journey from={from} to={to} {...journeyCbs} />
         <DepartDate time={departDate} {...departDateCbs} />
         <HighSpeed highSpeed={highSpeed} {...highSpeedCbs} />
         <Submit onSubmit={onSubmit} />
