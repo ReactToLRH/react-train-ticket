@@ -1,4 +1,4 @@
-# 旅游电商网站火车票PWA
+# 旅游电商网站火车票 PWA
 
 ## 项目描述
 
@@ -6,12 +6,14 @@
 
 ## 基础知识
 
-+ [React新特性](./readme/react_new.md)：`Context`与`ContextType`、`lazy`与`Suspense`、`memo`
-+ [React Hooks](./readme/react_hooks.md)
-+ [PWA](./readme/pwa.md)
+- [React 新特性](./readme/react_new.md)：`Context`与`ContextType`、`lazy`与`Suspense`、`memo`
+- [React Hooks](./readme/react_hooks.md)
+- [PWA](./readme/pwa.md)
 
 ## 使用插件/模块
 
-+ dayjs
-+ mocker-api
-+ classnames
+- dayjs
+- mocker-api
+- classnames
+- urijs
+- left-pad
