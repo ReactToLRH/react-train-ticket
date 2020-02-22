@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './style.css';
 
 import Home from '../Home';
+import Query from '../Query';
 
 const App = function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/query" component={Query} />
           <Route path="/" component={Home} />
         </Switch>
       </Router>
