@@ -6,12 +6,14 @@ import './style.css';
 import Home from '../Home';
 import Query from '../Query';
 import Ticket from '../Ticket';
+import Order from '../Order';
 
 const App = function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/order" component={Order} />
           <Route path="/ticket" component={Ticket} />
           <Route path="/query" component={Query} />
           <Route path="/" component={Home} />
