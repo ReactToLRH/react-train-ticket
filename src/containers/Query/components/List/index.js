@@ -27,7 +27,12 @@ const ListItem = memo(function ListItem(props) {
 
   return (
     <li className="list-item">
-      <Link to="/ticket" state={urlState}>
+      <Link
+        to={{
+          pathname: '/ticket',
+          state: urlState
+        }}
+      >
         <span className="item-time">
           <em>{dTime}</em>
           <br />
